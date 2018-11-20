@@ -249,13 +249,17 @@ void BST_312 <ItemType>::deleteItem(const ItemType& newItem)
 template<class ItemType>
 void BST_312 <ItemType>::makeEmpty(TreeNode*& t)
 { //my code
-    if (t== NULL){
+    if (t== NULL){ //nothing to be done
         return;
     }
     else {
-        makeEmpty(t->right);
-        makeEmpty(t->left);
-        deleteNode(t);
+        if (t->right!=NULL){
+            makeEmpty(t->right); //clear right
+        }
+        if (t->left!=NULL){
+            makeEmpty(t->left); //clear left
+        }
+        deleteNode(t); //clear node
     }
 }
 
@@ -295,12 +299,13 @@ template<class ItemType>
 void BST_312 <ItemType>::insertItem(TreeNode*& t, const ItemType& newItem)
 {   //our code
     if (t == NULL){
-        TreeNode* beg = new TreeNode;
+        TreeNode* beg = new TreeNode; //set parent
         beg->left = NULL;
         beg->right = NULL;
         beg->data = newItem;
         t=beg;
     }
+        //set children
     else if (t->data <  newItem){
         insertItem(t->right, newItem);
     }
